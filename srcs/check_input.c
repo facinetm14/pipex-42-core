@@ -37,8 +37,11 @@ int	ft_valid_args(char **argv, char **envp, t_pipe *my_pipe)
 	dirs_path = ft_get_path(envp);
 	paths = ft_split(&dirs_path[5], ':');
 	my_pipe->cmds[0].options = ft_split(argv[2], ' ');
-	ft_parse(my_pipe, paths, &status);
-	if (status != 0)
+	my_pipe->cmds[1].options = ft_split(argv[3], ' ');
+	ft_parse(my_pipe, paths, &status, 0);
+	ft_parse(my_pipe, paths, &status, 1);
+	free(paths);
+	if (status >= 2)
 		return (1);
 	perror("Error");
 	return (0);

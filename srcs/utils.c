@@ -27,7 +27,7 @@ char	*ft_get_path(char **envp)
 	return (NULL);
 }
 
-void	ft_parse(t_pipe *my_pipe, char **paths, int *status)
+void	ft_parse(t_pipe *my_pipe, char **paths, int *status, int cmd)
 {
 	char	*tmp[2];
 	int		i;
@@ -35,17 +35,17 @@ void	ft_parse(t_pipe *my_pipe, char **paths, int *status)
 	i = 0;
 	while (paths[i])
 	{
-		tmp[0] = ft_strjoin("/", my_pipe->cmds[0].options[0]);
+		tmp[0] = ft_strjoin("/", my_pipe->cmds[cmd].options[0]);
 		tmp[1] = ft_strjoin(paths[i], tmp[0]);
-		if (access(tmp[1], X_OK) == 0 && *status == 0)
+		if (access(tmp[1], X_OK) == 0)
 		{
-			my_pipe->cmds[0].bin_path = ft_strdup(tmp[1]);
-			*status = 1;
+			my_pipe->cmds[cmd].bin_path = ft_strdup(tmp[1]);
+			*status += 1;
 		}
 		free(tmp[0]);
 		free(tmp[1]);
-		free(paths[i]);
+		if (cmd > 0)
+			free(paths[i]);
 		i++;
 	}
-	free(paths);
 }

@@ -21,7 +21,9 @@ GNL = $(LIBS)gnl/
 LIBFT = $(LIBS)libft/
 
 SRCS = srcs/check_input.c\
-	srcs/utils.c
+	srcs/utils.c\
+	srcs/parent.c\
+	srcs/exec_first_cmd.c
 
 OBJS = ${SRCS:.c=.o}
 
