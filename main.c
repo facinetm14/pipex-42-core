@@ -31,15 +31,7 @@ int	main(int argc, char **argv, char **envp)
     {
         my_pipe.child = fork();
         if (my_pipe.child != 0)
-        {
-            waitpid(my_pipe.child, &(my_pipe.status), 0);
-            my_pipe.fd_args[1] = open(argv[4], O_CREAT | O_RDWR, 00700);
-            dup2(my_pipe.fd[0], 0);
-            dup2(my_pipe.fd_args[1], 1);
-            close(my_pipe.fd[0]);
-            close(my_pipe.fd[1]);
-            execve(my_pipe.cmds[1].bin_path, my_pipe.cmds[1].options, envp);
-        }
+			ft_exec_cmd_n(my_pipe, argv, envp);
         else
 			ft_exec_cmd_1(my_pipe, argv[1], envp);
     }

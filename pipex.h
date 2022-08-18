@@ -43,4 +43,6 @@ void	ft_parse(t_pipe *my_pipe, char **paths, int *status, int cmd);
 void    ft_parent_process(t_pipe my_pipe);
 /* exec_first_cmd.c*/
 void    ft_exec_cmd_1(t_pipe my_pipe, char *infile, char *envp[]);
+/*exec_last_cmd.c*/
+void	ft_exec_cmd_n(t_pipe my_pipe, char *argv[], char *envp[]);
 #endif
