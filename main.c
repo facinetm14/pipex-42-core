@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **envp)
     if ((my_pipe.id = pipe(my_pipe.fd) < 0))
         exit(0);
     my_pipe.child = fork();
-    if ( my_pipe.child != 0)
+    if (my_pipe.child != 0)
         ft_parent_process(my_pipe);
     else if (my_pipe.child == 0)
     {
