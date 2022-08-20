@@ -27,12 +27,13 @@ char	*ft_get_path(char **envp)
 	return (NULL);
 }
 
-void	ft_parse(t_pipe *my_pipe, char **paths, int *status, int cmd)
+void	ft_parse(t_pipe *my_pipe, char **paths, int cmd)
 {
-	char	*tmp[2];
+	char	*tmp[3];
 	int		i;
 
 	i = 0;
+	tmp[2] = "";
 	while (paths[i])
 	{
 		tmp[0] = ft_strjoin("/", my_pipe->cmds[cmd].options[0]);
@@ -41,6 +42,7 @@ void	ft_parse(t_pipe *my_pipe, char **paths, int *status, int cmd)
 		{
 			my_pipe->cmds[cmd].bin_path = ft_strdup(tmp[1]);
 			*status += 1;
+			tmp[2] = "OK";
 		}
 		free(tmp[0]);
 		free(tmp[1]);
@@ -48,4 +50,9 @@ void	ft_parse(t_pipe *my_pipe, char **paths, int *status, int cmd)
 			free(paths[i]);
 		i++;
 	}
+	if ((ft_strncmp(tmp[2], "OK", 2) != 0)
+		&& (ft_strncmp(my_pipe->error[cmd], "", 1) == 0))
+		my_pipe.error[cmd] = "command not found : ";
+	
+
 }
