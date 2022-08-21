@@ -12,13 +12,24 @@
 
 #include "../pipex.h"
 
-void	ft_exec_cmd_n(t_pipe my_pipe, char *argv[], char *envp[])
+void	ft_exec_cmd_n(t_pipe *my_pipe, char *argv[], char *envp[])
 {
-	waitpid(my_pipe.child, &(my_pipe.status), 0);
-	my_pipe.fd_args[1] = open(argv[4], O_CREAT | O_RDWR, 00700);
-	dup2(my_pipe.fd[0], 0);
-	dup2(my_pipe.fd_args[1], 1);
-	close(my_pipe.fd[0]);
-	close(my_pipe.fd[1]);
-	execve(my_pipe.cmds[1].bin_path, my_pipe.cmds[1].options, envp);
+	int	curr;
+
+	waitpid(my_pipe->child, &(my_pipe->status), 0);
+	curr = my_pipe->counter + 1;
+	if (my_pipe->nb_cmds > 0)
+	{
+		ft_printf("others commandes\n");
+		exit(0);
+	}
+	else
+	{
+		my_pipe->fd_args[1] = open(argv[4], O_CREAT | O_RDWR, 00700);
+		dup2(my_pipe->fd[curr - 1][0], 0);
+		dup2(my_pipe->fd_args[1], 1);
+		close(my_pipe->fd[curr - 1][0]);
+		close(my_pipe->fd[curr - 1][1]);
+		execve(my_pipe->cmds[curr].bin_path, my_pipe->cmds[curr].options, envp);
+	}
 }
