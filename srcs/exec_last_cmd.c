@@ -20,7 +20,6 @@ void	ft_exec_cmd_n(t_pipe *my_pipe, char *argv[], char *envp[])
 	curr = my_pipe->counter + 1;
 	if (my_pipe->nb_cmds > 0)
 	{
-		ft_printf("others commandes\n");
 		exit(0);
 	}
 	else
