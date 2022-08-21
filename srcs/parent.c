@@ -19,4 +19,5 @@ void	ft_parent_process(t_pipe my_pipe, int argc)
 	close(my_pipe.fd[argc - 5][0]);
 	close(my_pipe.fd[argc - 5][1]);
 	waitpid(my_pipe.child, &(my_pipe.status), 0);
+	free_my_pipe(my_pipe, argc);
 }

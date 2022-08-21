@@ -35,7 +35,7 @@ typedef struct s_pipe
 	int		fd_args[2];
 	int		child;
 	int		status;
-	char	error[2][100];
+	char	error[MAX_CMD][100];
 	int		nb_cmds;
 	int		counter;
 }				t_pipe;
@@ -46,6 +46,8 @@ void	ft_check_files(t_pipe *my_pipe, char *argv[]);
 void	ft_check_full_cmd_path(t_pipe *my_pipe, char **tmp, int cmd);
 /* utils_2.c*/
 void	ft_parse_all_cmds(char **paths, char **argv, t_pipe *my_pipe, int argc);
+void	free_my_pipe(t_pipe my_pipe, int argc);
+void	ft_exit_prog(t_pipe my_pipe, int argc);
 /* utils.c */
 char	*ft_get_path(char **envp);
 void	ft_parse(t_pipe *my_pipe, char **paths, int cmd);

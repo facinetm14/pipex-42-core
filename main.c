@@ -18,14 +18,15 @@ int	main(int argc, char **argv, char **envp)
 
 	my_pipe.fd_args[0] = 0;
 	my_pipe.fd_args[1] = 0;
-	my_pipe.nb_cmds = argc - 5;
+	my_pipe.nb_cmds = argc - 3;
 	my_pipe.counter = 0;
 	if (ft_valid_nb_args(argc) == 0)
 		exit(0);
 	if (ft_valid_args(argv, envp, &my_pipe, argc) == 0)
-		exit(-1);
+		ft_exit_prog(my_pipe, argc);
 	if (pipe(my_pipe.fd[0]) < 0)
 		exit(0);
+	my_pipe.nb_cmds -= 2;
 	my_pipe.child = fork();
 	if (my_pipe.child != 0)
 		ft_parent_process(my_pipe, argc);

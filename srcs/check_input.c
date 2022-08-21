@@ -79,6 +79,7 @@ void	ft_check_full_cmd_path(t_pipe *my_pipe, char **tmp, int cmd)
 		my_pipe->cmds[cmd].bin_path = ft_strdup(my_pipe->cmds[cmd].options[0]);
 		free(my_pipe->cmds[cmd].options[0]);
 		my_pipe->cmds[cmd].options[0] = ft_strdup(tmp_cmd[i -1]);
+		i = 0;
 		while (tmp_cmd[i])
 		{
 			free(tmp_cmd[i]);

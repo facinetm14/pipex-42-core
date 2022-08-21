@@ -27,3 +27,29 @@ void	ft_parse_all_cmds(char **paths, char **argv, t_pipe *my_pipe, int argc)
 		j++;
 	}
 }
+
+void	free_my_pipe(t_pipe my_pipe, int argc)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < argc - 3)
+	{
+		j = 0;
+		while (my_pipe.cmds[i].options[j])
+		{
+			free(my_pipe.cmds[i].options[j]);
+			j++;
+		}
+		free(my_pipe.cmds[i].bin_path);
+		free(my_pipe.cmds[i].options);
+		i++;
+	}
+}
+
+void	ft_exit_prog(t_pipe my_pipe, int argc)
+{
+	free_my_pipe(my_pipe, argc);
+	exit(0);
+}
