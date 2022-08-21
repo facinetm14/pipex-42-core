@@ -32,15 +32,19 @@ void	ft_check_files(t_pipe *my_pipe, char *argv[])
 		ft_strcat(my_pipe->error[0], " : ");
 		ft_strcat(my_pipe->error[0], argv[1]);
 	}
-	my_pipe->fd_args[1] = open(argv[4], O_CREAT | O_RDWR, 00700);
-	if (my_pipe->fd_args[1] < 0)
+	if (access(argv[4], F_OK) == 0)
 	{
-		ft_strcat(my_pipe->error[1], strerror(errno));
-		ft_strcat(my_pipe->error[1], " : ");
-		ft_strcat(my_pipe->error[1], argv[1]);
+		my_pipe->fd_args[1] = open(argv[4], O_RDWR, 00700);
+		if (my_pipe->fd_args[1] < 0)
+		{
+			ft_strcat(my_pipe->error[1], strerror(errno));
+			ft_strcat(my_pipe->error[1], " : ");
+			ft_strcat(my_pipe->error[1], argv[1]);
+		}
+		else
+			close(my_pipe->fd_args[1]);
 	}
-	else
-		close(my_pipe->fd_args[1]);
+	
 }
 
 int	ft_valid_args(char **argv, char **envp, t_pipe *my_pipe)
