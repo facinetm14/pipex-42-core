@@ -44,6 +44,7 @@ void	ft_check_full_cmd_path(t_pipe *my_pipe, char **tmp, int cmd);
 char	*ft_get_path(char **envp);
 void	ft_parse(t_pipe *my_pipe, char **paths, int cmd);
 void	ft_set_cmd_error_msg(t_pipe *my_pipe, char *tmp, int cmd);
+void	ft_put_error_outfile(t_pipe *my_pipe, char *outfile, char *error);
 /* parent.c */
 void	ft_parent_process(t_pipe my_pipe);
 /* exec_first_cmd.c*/

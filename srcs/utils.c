@@ -62,3 +62,10 @@ void	ft_parse(t_pipe *my_pipe, char **paths, int cmd)
 	ft_check_full_cmd_path(my_pipe, &tmp[2], cmd);
 	ft_set_cmd_error_msg(my_pipe, tmp[2], cmd);
 }
+
+void	ft_put_error_outfile(t_pipe *my_pipe, char *outfile, char *error)
+{
+	ft_strcat(my_pipe->error[1], error);
+	ft_strcat(my_pipe->error[1], " : ");
+	ft_strcat(my_pipe->error[1], outfile);
+}
