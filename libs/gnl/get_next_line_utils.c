@@ -37,7 +37,7 @@ void	ft_strcat(char *dst, const char *src)
 	dst[dst_len + i] = 0;
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 {
 	char	*sub_str;
 	size_t	i;
@@ -61,7 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (sub_str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr_gnl(const char *s, int c)
 {
 	int		i;
 	int		size;

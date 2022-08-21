@@ -21,9 +21,9 @@
 # include <unistd.h>
 # include <stddef.h>
 
-char	*ft_strchr(const char *s, int c);
+char	*ft_strchr_gnl(const char *s, int c);
 void	ft_strcat(char *dst, const char *src);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
 int		ft_size_s(char *s);

@@ -52,12 +52,12 @@ int	ft_read_line(char **line, char str_kept[], int *count)
 	int		i;
 	char	*tmp;
 
-	index = ft_strchr(str_kept, '\n');
+	index = ft_strchr_gnl(str_kept, '\n');
 	i = 0;
 	if (index != 0)
 	{
 		tmp = str_kept;
-		*line = ft_substr(tmp, 0, (index - tmp) + 1);
+		*line = ft_substr_gnl(tmp, 0, (index - tmp) + 1);
 		while (*(index + 1 + i) != 0)
 		{
 			str_kept[i] = *(index + 1 + i);

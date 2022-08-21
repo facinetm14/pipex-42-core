@@ -23,29 +23,31 @@
 
 typedef struct s_cmd
 {
-	char 	*bin_path;
+	char	*bin_path;
 	char	**options;
 }			t_cmd;
 typedef struct s_pipe
 {
-    int		fd[2];
-    t_cmd	cmds[2];
-    int     fd_args[2];
-    int     child;
-    int     status;
-    int     id;
-    char    *error[2];
-}               t_pipe;
+	int		fd[2];
+	t_cmd	cmds[2];
+	int		fd_args[2];
+	int		child;
+	int		status;
+	char	error[2][100];
+}				t_pipe;
 /* check_input.c */
-int	    ft_valid_nb_args(int argc);
-int	    ft_valid_args(char **argv, char **envp, t_pipe *my_pipe);
+int		ft_valid_nb_args(int argc);
+int		ft_valid_args(char **argv, char **envp, t_pipe *my_pipe);
+void	ft_check_files(t_pipe *my_pipe, char *argv[]);
+void	ft_check_full_cmd_path(t_pipe *my_pipe, char **tmp, int cmd);
 /* utils.c */
-char    *ft_get_path(char **envp);
+char	*ft_get_path(char **envp);
 void	ft_parse(t_pipe *my_pipe, char **paths, int cmd);
+void	ft_set_cmd_error_msg(t_pipe *my_pipe, char *tmp, int cmd);
 /* parent.c */
-void    ft_parent_process(t_pipe my_pipe);
+void	ft_parent_process(t_pipe my_pipe);
 /* exec_first_cmd.c*/
-void    ft_exec_cmd_1(t_pipe my_pipe, char *infile, char *envp[]);
+void	ft_exec_cmd_1(t_pipe my_pipe, char *infile, char *envp[]);
 /*exec_last_cmd.c*/
 void	ft_exec_cmd_n(t_pipe my_pipe, char *argv[], char *envp[]);
 #endif
