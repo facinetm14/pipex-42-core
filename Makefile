@@ -24,7 +24,8 @@ SRCS = srcs/check_input.c\
 	srcs/utils.c\
 	srcs/parent.c\
 	srcs/exec_first_cmd.c\
-	srcs/exec_last_cmd.c
+	srcs/exec_last_cmd.c\
+	srcs/utils_2.c
 
 OBJS = ${SRCS:.c=.o}
 

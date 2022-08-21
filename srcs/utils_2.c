@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 01:15:41 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/08/18 01:15:41 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/08/21 04:37:57 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/08/21 04:37:57 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ft_parent_process(t_pipe my_pipe, int argc)
+void	ft_parse_all_cmds(char **paths, char **argv, t_pipe *my_pipe, int argc)
 {
-	close(my_pipe.fd_args[0]);
-	close(my_pipe.fd_args[1]);
-	close(my_pipe.fd[argc - 5][0]);
-	close(my_pipe.fd[argc - 5][1]);
-	waitpid(my_pipe.child, &(my_pipe.status), 0);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 2;
+	while (i < argc - 3)
+	{
+		my_pipe->cmds[i].options = ft_split(argv[j], ' ');
+		ft_parse(my_pipe, paths, i);
+		i++;
+		j++;
+	}
 }

@@ -14,7 +14,7 @@
 
 int	ft_valid_nb_args(int argc)
 {
-	if (argc != 5)
+	if (argc < 5)
 	{
 		ft_printf("Error : few arguments\n");
 		return (0);
@@ -47,7 +47,7 @@ void	ft_check_files(t_pipe *my_pipe, char *argv[])
 	
 }
 
-int	ft_valid_args(char **argv, char **envp, t_pipe *my_pipe)
+int	ft_valid_args(char **argv, char **envp, t_pipe *my_pipe, int argc)
 {
 	char	*dirs_path;
 	char	**paths;
@@ -55,10 +55,7 @@ int	ft_valid_args(char **argv, char **envp, t_pipe *my_pipe)
 	ft_check_files(my_pipe, argv);
 	dirs_path = ft_get_path(envp);
 	paths = ft_split(&dirs_path[5], ':');
-	my_pipe->cmds[0].options = ft_split(argv[2], ' ');
-	my_pipe->cmds[1].options = ft_split(argv[3], ' ');
-	ft_parse(my_pipe, paths, 0);
-	ft_parse(my_pipe, paths, 1);
+	ft_parse_all_cmds(paths, argv, my_pipe, argc);
 	free(paths);
 	if (my_pipe->error[0][0] == 0 && my_pipe->error[1][0] == 0)
 		return (1);
