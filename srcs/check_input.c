@@ -14,7 +14,7 @@
 
 int	ft_valid_nb_args(int argc)
 {
-	if (argc < 5)
+	if (argc != 5)
 	{
 		ft_printf("Error : few arguments\n");
 		return (0);

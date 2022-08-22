@@ -19,9 +19,7 @@ void	ft_exec_cmd_n(t_pipe *my_pipe, char *argv[], char *envp[])
 	waitpid(my_pipe->child, &(my_pipe->status), 0);
 	curr = my_pipe->counter + 1;
 	if (my_pipe->nb_cmds > 0)
-	{
 		exit(0);
-	}
 	else
 	{
 		my_pipe->fd_args[1] = open(argv[4], O_CREAT | O_RDWR, 00700);
