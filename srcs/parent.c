@@ -12,12 +12,12 @@
 
 #include "../pipex.h"
 
-void	ft_parent_process(t_pipe my_pipe, int argc)
+void	ft_parent_process(t_pipe *my_pipe)
 {
-	close(my_pipe.fd_args[0]);
-	close(my_pipe.fd_args[1]);
-	close(my_pipe.fd[argc - 5][0]);
-	close(my_pipe.fd[argc - 5][1]);
-	waitpid(my_pipe.child, &(my_pipe.status), 0);
-	free_my_pipe(my_pipe, argc);
+	close(my_pipe->fd_args[0]);
+	close(my_pipe->fd_args[1]);
+	close(my_pipe->fd[0]);
+	close(my_pipe->fd[1]);
+	waitpid(my_pipe->child, &(my_pipe->status), 0);
+	free_my_pipe(my_pipe);
 }
