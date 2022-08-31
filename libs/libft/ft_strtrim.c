@@ -36,10 +36,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	return (str_trimed);
 }
-
-int main(void)
-{
-	char *test = "AyoubAyoubbouyAis a good boy but he is Ayoub Ayoub very crazy and I like Ayoub Ayoub Ayoub";
-	char *resul = ft_strtrim(test, "Ayoub");
-	printf("%s", resul);
-}

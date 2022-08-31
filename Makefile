@@ -23,9 +23,11 @@ LIBFT = $(LIBS)libft/
 SRCS = srcs/check_input.c\
 	srcs/utils.c\
 	srcs/parent.c\
-	srcs/exec_first_cmd.c\
-	srcs/exec_last_cmd.c\
-	srcs/utils_2.c
+	srcs/exec_cmd.c\
+	srcs/childs_process.c\
+	srcs/utils_2.c\
+	srcs/errors.c\
+	srcs/utils_3.c
 
 OBJS = ${SRCS:.c=.o}
 

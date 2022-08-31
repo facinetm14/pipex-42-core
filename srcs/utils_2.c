@@ -12,22 +12,33 @@
 
 #include "../pipex.h"
 
-void	free_my_pipe(t_pipe *my_pipe)
+void	ft_init_pipe(t_pipe *p, int argc, char **argv, char **envp)
+{
+	p->fd_args[0] = 0;
+	p->fd_args[1] = 0;
+	p->nb_cmd = argc - 3;
+	p->ac = argc;
+	p->av = argv;
+	p->child = 0;
+	p->env = envp;
+}
+
+void	free_p(t_pipe *p)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < 2)
+	while (i < p->nb_cmd)
 	{
 		j = 0;
-		while (my_pipe->cmds[i].options[j])
+		while (p->cmds[i].options[j])
 		{
-			free(my_pipe->cmds[i].options[j]);
+			free(p->cmds[i].options[j]);
 			j++;
 		}
-		free(my_pipe->cmds[i].bin_path);
-		free(my_pipe->cmds[i].options);
+		free(p->cmds[i].bin_path);
+		free(p->cmds[i].options);
 		i++;
 	}
 }
@@ -42,4 +53,17 @@ int	len_path(char **paths)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_parse_all(t_pipe *p, char **pt)
+{
+	int	i;
+
+	i = 0;
+	while (i < p->nb_cmd)
+	{
+		p->cmds[i].options = ft_split(p->av[2 + i], ' ');
+		ft_parse(p, pt, i);
+		i++;
+	}
 }

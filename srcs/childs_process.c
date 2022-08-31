@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parent.c                                           :+:      :+:    :+:   */
+/*   exec_last_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 01:15:41 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/08/18 01:15:41 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/08/18 02:27:18 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/08/18 02:27:18 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ft_parent_process(t_pipe *p)
+/* redirecting into fd according to the commands */
+void	ft_childs_process(t_pipe *p)
 {
-	int	i;
-
-	i = 0;
-	while (i < p->nb_cmd - 1)
+	if (p->child == 0)
+		ft_exec_cmd_1(p);
+	else if (p->child > 0 && p->child < p->nb_cmd - 1)
 	{
-		close(p->fd[i][0]);
-		close(p->fd[i][1]);
-		i++;
+		dup2(p->fd[p->child - 1][0], 0);
+		dup2(p->fd[p->child][1], 1);
 	}
-	close(p->fd_args[0]);
-	close(p->fd_args[1]);
-	i = 0;
-	while (i < p->nb_cmd)
-	{
-		wait(&p->status);
-		i++;
-	}
+	else if (p->child == p->nb_cmd - 1)
+		ft_exec_cmd_last(p);
+	ft_close_fds(p);
 }

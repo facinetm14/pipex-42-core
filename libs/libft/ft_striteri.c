@@ -6,11 +6,12 @@
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:50:52 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/06/24 22:01:33 by fakouyat         ###   ########.fr       */
+/*   Updated: 2022/08/28 18:43:11 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int	i;

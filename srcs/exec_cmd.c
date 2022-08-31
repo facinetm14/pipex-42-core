@@ -12,12 +12,30 @@
 
 #include "../pipex.h"
 
-void	ft_exec_cmd_1(t_pipe my_pipe, char *infile, char *envp[])
+void	ft_exec_cmd_1(t_pipe *p)
 {
-	my_pipe.fd_args[0] = open(infile, O_RDONLY, 0777);
-	dup2(my_pipe.fd_args[0], 0);
-	dup2(my_pipe.fd[1], 1);
-	close(my_pipe.fd[0]);
-	close(my_pipe.fd[1]);
-	execve(my_pipe.cmds[0].bin_path, my_pipe.cmds[0].options, envp);
+	p->fd_args[0] = open(p->av[1], O_RDONLY, 0777);
+	dup2(p->fd_args[0], 0);
+	dup2(p->fd[0][1], 1);
+}
+
+void	ft_exec_cmd_last(t_pipe *p)
+{
+	p->fd_args[1] = open(p->av[p->ac - 1], O_CREAT | O_RDWR | O_TRUNC, 0777);
+	dup2(p->fd[p->child - 1][0], 0);
+	dup2(p->fd_args[1], 1);
+	close(p->fd_args[1]);
+}
+
+void	ft_close_fds(t_pipe *p)
+{
+	int	i;
+
+	i = 0;
+	while (i < p->nb_cmd - 1)
+	{
+		close(p->fd[i][0]);
+		close(p->fd[i][1]);
+		i++;
+	}
 }

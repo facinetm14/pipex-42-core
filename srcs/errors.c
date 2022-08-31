@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_last_cmd.c                                    :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fakouyat <fakouyat@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 02:27:18 by fakouyat          #+#    #+#             */
-/*   Updated: 2022/08/18 02:27:18 by fakouyat         ###   ########.fr       */
+/*   Created: 2022/08/29 15:08:40 by fakouyat          #+#    #+#             */
+/*   Updated: 2022/08/29 15:08:40 by fakouyat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-void	ft_exec_cmd_n(t_pipe *my_pipe, char *argv[], char *envp[])
+int	ft_is_error(t_pipe *p)
 {
-	waitpid(my_pipe->child, &(my_pipe->status), 0);
-	my_pipe->fd_args[1] = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0777);
-	dup2(my_pipe->fd[0], 0);
-	dup2(my_pipe->fd_args[1], 1);
-	close(my_pipe->fd[0]);
-	close(my_pipe->fd[1]);
-	execve(my_pipe->cmds[1].bin_path, my_pipe->cmds[1].options, envp);
+	int	i;
+
+	i = 0;
+	while (i < p->nb_cmd)
+	{
+		if (p->error[i][0] != '\0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	ft_print_err_message(t_pipe *p)
+{
+	int	i;
+
+	i = 0;
+	while (i < p->nb_cmd)
+	{
+		if (p->error[i][0] != '\0')
+			ft_printf("%s\n", p->error[i]);
+		i++;
+	}
 }
