@@ -27,3 +27,13 @@ void	ft_generate_p(t_pipe *p)
 		i++;
 	}
 }
+
+int	ft_valid_nb_args_bonus(int argc)
+{
+	if (argc < 5)
+	{
+		ft_printf("Error : fews arguments\n");
+		return (0);
+	}
+	return (1);
+}

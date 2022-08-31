@@ -41,6 +41,12 @@ $(NAME) :
 	make -C $(GNL)
 	$(CC) $(CFLAGS) main.c $(SRCS) $(LIBFT)libft.a $(FT_PRINTF)libftprintf.a $(GNL)gnl.a -o $(NAME)
 
+bonus :
+	make -C $(LIBFT)
+	make -C $(FT_PRINTF)
+	make -C $(GNL)
+	$(CC) $(CFLAGS) main_bonus.c $(SRCS) $(LIBFT)libft.a $(FT_PRINTF)libftprintf.a $(GNL)gnl.a -o $(NAME)
+
 clean :
 	make clean -C $(LIBFT)
 	make clean -C $(FT_PRINTF)

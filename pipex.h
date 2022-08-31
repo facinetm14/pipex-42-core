@@ -69,5 +69,6 @@ int		ft_is_error(t_pipe *p);
 void	ft_print_err_message(t_pipe *p);
 /* util_3.c */
 void	ft_generate_p(t_pipe *p);
+int		ft_valid_nb_args_bonus(int argc);
 
 #endif
